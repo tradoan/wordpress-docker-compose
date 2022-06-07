@@ -34,14 +34,16 @@ services:
     depends_on:
       - wordpress
       - phpmyadmin
-    image: nginx:1.15.12-alpine
+    image: nginx:1.21.6
     container_name: webserver
     restart: unless-stopped
     ports:
       - '80:80'
     volumes:
       - wordpress:/var/www/html
-      - ./nginx-conf:/etc/nginx/conf.d
+      - ./nginx-conf/default.conf.template:/etc/nginx/templates/default.conf.template
+    environment:
+      - SERVER_NAME=$SERVER_NAME
 
   phpmyadmin:
     depends_on:
