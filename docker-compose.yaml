@@ -5,7 +5,6 @@ services:
     image: mysql:8.0
     container_name: db
     restart: unless-stopped
-    env_file: .env
     environment:
       - MYSQL_DATABASE=wordpress
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
@@ -51,11 +50,13 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     restart: unless-stopped
-    ports:
-      - 8080:80
+    # ports:
+    #   - 8080:80
     environment:
+      - PMA_ARBITRARY=1
       - PMA_HOST=db
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - PMA_ABSOLUTE_URI=$PMA_ABSOLUTE_URI
 
 volumes:
   wordpress:
