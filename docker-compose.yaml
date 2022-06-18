@@ -20,7 +20,6 @@ services:
     image: wordpress:5.1.1-fpm-alpine
     container_name: wordpress
     restart: unless-stopped
-    env_file: .env
     environment:
       - WORDPRESS_DB_HOST=db
       - WORDPRESS_DB_USER=$MYSQL_USER
@@ -40,7 +39,7 @@ services:
       - '80:80'
     volumes:
       - wordpress:/var/www/html
-      - ./nginx-conf/default.conf.template:/etc/nginx/templates/default.conf.template
+      - ./nginx-templates/default.conf.template:/etc/nginx/templates/default.conf.template
     environment:
       - SERVER_NAME=$SERVER_NAME
 
